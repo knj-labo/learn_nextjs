@@ -1,21 +1,26 @@
-import { Controller, Post, Body } from '@nestjs/common';
-import * as argon from 'argon2';
-
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Post,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
-import AutoDto from './dto/auth.dto';
+import { AuthDto } from './dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('signup')
-  signup(@Body() dto: AutoDto) {
-    const hash = argon.hash(dto.password);
-    return this.authService.signup();
+  signup(@Body() dto: AuthDto) {
+    console.log({ dto });
+    return this.authService.signup(dto);
   }
 
+  @HttpCode(HttpStatus.OK)
   @Post('signin')
-  sigin() {
+  signin(@Body() dto: AuthDto) {
     return this.authService.signin();
   }
 }
