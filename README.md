@@ -60,6 +60,9 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+
+# setup docker-command
+$ docker compose up dev-db -d
 ```
 
 ## Test
